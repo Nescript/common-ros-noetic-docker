@@ -69,7 +69,9 @@ RUN apt-get update && \
         git \
         vim \
         jq \
-        libserial-dev && \
+        libserial-dev \
+	iproute2 && \
+
     # 安装新版 cmake 和 clangd-21 (从 LLVM 源)
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     apt-add-repository 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-21 main' && \
