@@ -25,7 +25,7 @@ services:
       # 持久化 VS Code Server，避免每次重建容器重复下载安装
       - vscode-server-data:/root/.vscode-server
       - vscode-extensions:/root/.vscode/extensions
-
+    ipc: host
 volumes:
   vscode-server-data:
   vscode-extensions:
