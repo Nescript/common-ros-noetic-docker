@@ -20,7 +20,7 @@ ENV HOST_HOME_DIR=${HOST_HOME_DIR}
 # 2. 基础系统工具、PPA 及 LLVM 21 源配置
 # 将 LLVM 源提到前面，减少 apt-get update 次数
 RUN apt-get update && apt-get install -y \
-    sudo software-properties-common wget gnupg curl build-essential git vim jq \
+    sudo software-properties-common wget gnupg curl build-essential git vim jq sshpass\
     && mkdir -p /etc/apt/keyrings \
     && curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key | gpg --dearmor -o /etc/apt/keyrings/llvm.gpg \
     && echo 'deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/focal/ llvm-toolchain-focal-21 main' > /etc/apt/sources.list.d/llvm.list \
@@ -106,29 +106,60 @@ RUN ln -sf /usr/local/bin/python3.10 /usr/bin/python3 && \
         -Dllvm=enabled \
         -Dshared-llvm=enabled && \
     ninja -C build install && \
-    # --- 还原环境 ---
     rm -f /usr/bin/python && \
     rm /usr/bin/python3 && \
     ln -s /usr/bin/python3.8 /usr/bin/python3 && \
     cd / && rm -rf /opt/driver_stack
 
+# 恢复python3.8环境的小补丁,以及git信任仓库
+RUN rm -f /usr/bin/python && \
+    rm /usr/bin/python3 && \
+    rm /usr/local/bin/python3 && \
+    ln -s /usr/bin/python3.8 /usr/bin/python3 && \
+    ln -s /usr/bin/python3 && \
+    git config --global --add safe.directory '*'
 # 7. 运行时配置
 ENV XINIT_THREADS=1 \
     MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 
+RUN mkdir -p -m 0700 /root/.ssh && \
+    ssh-keyscan github.com >> /root/.ssh/known_hostsq
+
+RUN apt-get update && apt-get install bash-completion
+
 # 8. 配置 Bash 交互环境
-RUN echo '\n# 颜色化 bash\n\
-export TERM=xterm-256color\n\
-alias ls="ls --color=auto"\n\
-alias grep="grep --color=auto"\n\
-alias ll="ls -alF --color=auto"\n\
-alias pl="rosrun plotjuggler plotjuggler"\n\
-PS1="${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ "\n\n\
-# ROS 环境配置\n\
-source /opt/ros/noetic/setup.bash' >> /root/.bashrc
+RUN cat <<EOF >> /root/.bashrc
+
+# 颜色化 bash
+export TERM=xterm-256color
+alias ls="ls --color=auto"
+alias grep="grep --color=auto"
+alias ll="ls -alF --color=auto"
+alias pl="rosrun plotjuggler plotjuggler"
+alias openbash="vim ~/.bashrc"
+alias wired="sshpass -p dynamicx ssh dynamicx@192.168.100.2"
+alias wireless="sshpass -p dynamicx ssh dynamicx@192.168.1.116"
+alias hl='echo "Hello,world!"'
+alias wired_rqt="export ROS_MASTER_URI=http://192.168.100.2 && rqt"
+PS1='\${debian_chroot:+(\$debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '
+source /usr/share/bash-completion/bash_completion
+# ROS 环境配置
+source /opt/ros/noetic/setup.bash
+
+#export ROS_MASTER_URI=http://192.168.100.2:11311/
+#export ROS_IP=192.168.100.1
+export ROS_IP=127.0.0.1
+export ROS_MASTER_URI=http://127.0.0.1:11311/
+echo ROS_IP=$ROS_IP
+echo ROS_MASTER_URI=$ROS_MASTER_URI
+export ROBOT_TYPE=series_legged2
+export WORKSPACE=/home/nesc/catkin_ws
+source $WORKSPACE/devel/setup.bash
+echo "Workspace env: $WORKSPACE"
+EOF
 
 WORKDIR ${HOST_HOME_DIR}
 
 LABEL org.opencontainers.image.source=https://github.com/HydrogenZp/common-ros-noetic-docker \
-      org.opencontainers.image.description="ROS Noetic with Mesa 26.1 (AMD 890M/RDNA 3.5 support)" \
+      org.opencontainers.image.description="ROS Noetic with Mesa 26.1 (AMD 880M/RDNA 3.5 support)" \
       org.opencontainers.image.licenses=MIT

@@ -15,6 +15,7 @@ services:
       - QT_X11_NO_MITSHM=1
       - XCURSOR_THEME=Adwaita
       - XCURSOR_SIZE=24
+      - SSH_AUTH_SOCK=/ssh-agent
     volumes:
       # 映射 XWayland 图形套接字
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
@@ -22,6 +23,8 @@ services:
       # 持久化 VS Code Server，避免每次重建容器重复下载安装
       - vscode-server-data:/root/.vscode-server
       - vscode-extensions:/root/.vscode/extensions
+      # 映射宿主机的 ssh 目录
+      - ~/.ssh:/root/.ssh
     ipc: host
 volumes:
   vscode-server-data:
