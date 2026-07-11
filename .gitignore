@@ -1,0 +1,10 @@
+# Logs and outputs
+nohup.out
+nohup.*
+*.log
+
+# Temp notes
+mesa.md
+
+# OS generated files
+.DS_Store
