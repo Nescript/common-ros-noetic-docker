@@ -2,6 +2,13 @@ FROM osrf/ros:noetic-desktop-full
 
 USER root
 
+# 0. 换源到阿里云镜像以加速 apt 与 pip 构建
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
+    sed -i 's/security.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
+    sed -i 's/packages.ros.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/ros*.list || true \
+    && mkdir -p /root/.config/pip \
+    && printf "[global]\nindex-url = https://mirrors.aliyun.com/pypi/simple/\n[install]\ntrusted-host = mirrors.aliyun.com\n" > /root/.config/pip/pip.conf
+
 # 1. 设置环境变量，避免交互式提示
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Shanghai
@@ -20,11 +27,10 @@ ENV HOST_HOME_DIR=${HOST_HOME_DIR}
 # 2. 基础系统工具、PPA 及 LLVM 21 源配置
 # 将 LLVM 源提到前面，减少 apt-get update 次数
 RUN apt-get update && apt-get install -y \
-    sudo software-properties-common wget gnupg curl build-essential git vim jq sshpass\
+    sudo software-properties-common wget gnupg curl build-essential git vim jq sshpass openssh-server \
     && mkdir -p /etc/apt/keyrings \
     && curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key | gpg --dearmor -o /etc/apt/keyrings/llvm.gpg \
     && echo 'deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/focal/ llvm-toolchain-focal-21 main' > /etc/apt/sources.list.d/llvm.list \
-    && add-apt-repository -y ppa:kisak/kisak-mesa \
     && apt-get update && apt-get dist-upgrade -y \
     && apt-get install -y clangd-21 clang-format llvm-21-dev \
     && ln -s /usr/bin/clangd-21 /usr/local/bin/clangd \
@@ -123,9 +129,17 @@ ENV XINIT_THREADS=1 \
     MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 
 RUN mkdir -p -m 0700 /root/.ssh && \
-    ssh-keyscan github.com >> /root/.ssh/known_hostsq
+    ssh-keyscan github.com >> /root/.ssh/known_hosts
 
-RUN apt-get update && apt-get install bash-completion
+# 8. 配置 SSH 服务 (用于 remote-nvim 连接，运行在 2222 端口以避免与宿主机冲突)
+RUN mkdir -p /var/run/sshd \
+    && echo 'root:rootpassword' | chpasswd \
+    && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config \
+    && echo "Port 2222" >> /etc/ssh/sshd_config \
+    && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+
+RUN apt-get update && apt-get install -y bash-completion
 
 # 8. 配置 Bash 交互环境
 RUN cat <<EOF >> /root/.bashrc

@@ -7,7 +7,15 @@ services:
     container_name: ros1_noetic_dev
     network_mode: "host"
     privileged: true
-    command: tail -f /dev/null
+    command: /usr/sbin/sshd -D
+    # 内存限制 - 防止 OOM 影响系统
+    deploy:
+      resources:
+        limits:
+          memory: 8G        # 硬限制 8GB
+          cpus: '4.0'       # CPU 限制
+        reservations:
+          memory: 4G        # 保证至少 4GB
     devices:
       - /dev/dri:/dev/dri
     environment:
@@ -16,6 +24,8 @@ services:
       - XCURSOR_THEME=Adwaita
       - XCURSOR_SIZE=24
       - SSH_AUTH_SOCK=/ssh-agent
+      # VSCode 扩展内存限制
+      - NODE_OPTIONS=--max-old-space-size=4096
     volumes:
       # 映射 XWayland 图形套接字
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
@@ -23,8 +33,10 @@ services:
       # 持久化 VS Code Server，避免每次重建容器重复下载安装
       - vscode-server-data:/root/.vscode-server
       - vscode-extensions:/root/.vscode/extensions
-      # 映射宿主机的 ssh 目录
-      - ~/.ssh:/root/.ssh
+      # 映射宿主机的 ssh 目录到临时目录以避免权限冲突
+      - ~/.ssh:/root/.ssh_host:ro
+      # 映射 SSH Agent Socket，以便容器内进行 SSH 代理转发 (SSH Agent Forwarding)
+      - ${SSH_AUTH_SOCK}:/ssh-agent
     ipc: host
 volumes:
   vscode-server-data:
