@@ -24,29 +24,53 @@ This project provides a containerized ROS Noetic development environment with co
 
 ## Quick Start
 
-### Build the Image
+### 1. Configure Environment Variables
 
-```bash
-docker-compose build
-```
-
-Before first use, set this in `.env` at the project root:
+Before first use, set your host user directory path in the `.env` file at the project root:
 
 ```bash
 HOST_HOME_DIR=/home/your-username
 ```
 
-### Run the Container
+### 2. Choose and Run the Configuration Matching Your GPU
 
-```bash
-docker-compose up -d
-```
+Select the Docker Compose file that matches your hardware configuration:
 
-> Dev Container startup speed tip:
-> this project persists `/root/.vscode-server` via Docker named volumes, so VS Code Server and remote extension data are reused across container recreations.
-> First attach may still be slow (download + extract), while subsequent attaches are much faster.
+#### A. AMD Integrated GPU (RDNA 3.5 architecture & newer AMD cards)
+Compiles Python 3.10 and Mesa 26.1-devel from source based on LLVM 21 to fully support new AMD integrated GPUs (such as Radeon 880M).
+* **Build**:
+  ```bash
+  docker compose -f docker-compose.amd.yml build
+  ```
+* **Start**:
+  ```bash
+  docker compose -f docker-compose.amd.yml up -d
+  ```
 
-### Access the Container
+#### B. Intel Integrated GPU (Intel UHD, Iris Xe, etc.)
+Compiles Mesa 26.1-devel from source targeting Intel's `iris` and `crocus` drivers to support both new and old Intel graphics cards.
+* **Build**:
+  ```bash
+  docker compose -f docker-compose.intel.yml build
+  ```
+* **Start**:
+  ```bash
+  docker compose -f docker-compose.intel.yml up -d
+  ```
+
+#### C. NVIDIA Discrete GPU
+**Skips the time-consuming Mesa compilation phase**, leveraging the host's NVIDIA drivers via the `nvidia-container-toolkit` for high performance and fast build speeds.
+* **Prerequisites**: Ensure the host has `nvidia-container-toolkit` installed.
+* **Build**:
+  ```bash
+  docker compose -f docker-compose.nvidia.yml build
+  ```
+* **Start**:
+  ```bash
+  docker compose -f docker-compose.nvidia.yml up -d
+  ```
+
+### 3. Access the Container
 
 ```bash
 docker exec -it ros1_noetic_dev bash

@@ -24,29 +24,53 @@
 
 ## 快速开始
 
-### 构建镜像
+### 1. 配置环境变量
 
-```bash
-docker-compose build
-```
-
-首次使用请先在项目根目录 `.env` 中设置：
+首次使用请先在项目根目录 `.env` 中设置您的宿主机用户目录：
 
 ```bash
 HOST_HOME_DIR=/home/你的用户名
 ```
 
-### 启动容器
+### 2. 选择并使用对应显卡配置
 
-```bash
-docker-compose up -d
-```
+根据您的电脑硬件配置，选择运行对应的 Docker Compose 文件：
 
-> Dev Container 启动加速提示：
-> 本项目通过 Docker 命名卷持久化 `/root/.vscode-server`，因此 VS Code Server 和远程扩展数据会在重建容器后复用。
-> 首次连接可能仍较慢（下载 + 解压），后续连接会明显更快。
+#### A. AMD 核显 (RDNA 3.5 架构及其他新款 AMD 显卡)
+本项目会自动下载 Python 3.10 并基于 LLVM 21 源码编译 Mesa 26.1-devel，以完美支持新款 AMD 显卡（例如 Radeon 880M）。
+* **构建**：
+  ```bash
+  docker compose -f docker-compose.amd.yml build
+  ```
+* **启动**：
+  ```bash
+  docker compose -f docker-compose.amd.yml up -d
+  ```
 
-### 进入容器
+#### B. Intel 核显 (Intel UHD, Iris Xe 等)
+本项目会自动源码编译 Mesa 26.1-devel，并指定编译 Intel 的 `iris` 与 `crocus` 驱动，以兼容新款与旧款 Intel 核显。
+* **构建**：
+  ```bash
+  docker compose -f docker-compose.intel.yml build
+  ```
+* **启动**：
+  ```bash
+  docker compose -f docker-compose.intel.yml up -d
+  ```
+
+#### C. NVIDIA 独显/卡
+本项目**跳过了耗时的 Mesa 源码编译阶段**，通过 `nvidia-container-toolkit` 直接透传宿主机的 NVIDIA 显卡驱动，构建速度极快。
+* **前提条件**：宿主机需要提前安装好 `nvidia-container-toolkit`。
+* **构建**：
+  ```bash
+  docker compose -f docker-compose.nvidia.yml build
+  ```
+* **启动**：
+  ```bash
+  docker compose -f docker-compose.nvidia.yml up -d
+  ```
+
+### 3. 进入容器
 
 ```bash
 docker exec -it ros1_noetic_dev bash
