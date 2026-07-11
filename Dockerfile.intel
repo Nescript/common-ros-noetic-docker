@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
     && curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key | gpg --dearmor -o /etc/apt/keyrings/llvm.gpg \
     && echo 'deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/focal/ llvm-toolchain-focal-21 main' > /etc/apt/sources.list.d/llvm.list \
     && apt-get update && apt-get dist-upgrade -y \
-    && apt-get install -y clangd-21 clang-format llvm-21-dev \
+    && apt-get install -y clang-21 clangd-21 clang-format llvm-21-dev libclc-21-dev libclang-21-dev libclang-common-21-dev \
     && ln -s /usr/bin/clangd-21 /usr/local/bin/clangd \
     && ln -sf /usr/lib/llvm-21/bin/llvm-config /usr/local/bin/llvm-config \
     && rm -rf /var/lib/apt/lists/*
@@ -76,8 +76,8 @@ RUN wget https://www.python.org/ftp/python/3.10.13/Python-3.10.13.tgz && \
     tar -xf Python-3.10.13.tgz && cd Python-3.10.13 && \
     ./configure --enable-optimizations && \
     make -j$(nproc) install && \
-    curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10 && \
-    python3.10 -m pip install meson mako ninja docutils pyyaml && \
+    printf "[global]\nindex-url = https://pypi.org/simple/\n" > /root/.config/pip/pip.conf && \
+    python3.10 -m pip install cmake meson mako ninja docutils pyyaml && \
     cd / && rm -rf /opt/python_build
 
 # 6. 升级驱动栈 (Wayland -> Libdrm -> Mesa)
@@ -91,13 +91,28 @@ RUN ln -sf /usr/local/bin/python3.10 /usr/bin/python3 && \
     git clone --depth 1 https://gitlab.freedesktop.org/wayland/wayland-protocols.git && \
     cd wayland-protocols && meson setup build -Dprefix=/usr && \
     ninja -C build install && cd .. && \
+    # --- SPIRV-LLVM-Translator ---
+    git clone -b llvm_release_210 --depth 1 https://github.com/KhronosGroup/SPIRV-LLVM-Translator.git && \
+    cd SPIRV-LLVM-Translator && mkdir build && cd build && \
+    cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release && \
+    make -j$(nproc) && make install && cd ../.. && \
+    # --- SPIRV-Headers & SPIRV-Tools ---
+    git clone --depth 1 https://github.com/KhronosGroup/SPIRV-Headers.git && \
+    git clone --depth 1 https://github.com/KhronosGroup/SPIRV-Tools.git && \
+    mkdir -p SPIRV-Tools/external && \
+    ln -s ../../SPIRV-Headers SPIRV-Tools/external/spirv-headers && \
+    cd SPIRV-Tools && mkdir build && cd build && \
+    cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DSPIRV_SKIP_TESTS=ON && \
+    make -j$(nproc) && make install && cd ../.. && \
+    # --- Libdrm ---
     git clone --depth 1 https://gitlab.freedesktop.org/mesa/drm.git && \
     cd drm && meson setup build -Dprefix=/usr && \
     ninja -C build install && cd .. && \
+    # --- Mesa ---
     git clone --depth 1 https://gitlab.freedesktop.org/mesa/mesa.git && \
     cd mesa && \
     sed -i "s/need: '>= 3.10'/need: '>= 3.8'/g" meson.build && \
-    meson setup build \
+    CC=clang-21 CXX=clang++-21 meson setup build \
         -Dprefix=/usr \
         -Dlibdir=lib/x86_64-linux-gnu \
         -Dplatforms=x11,wayland \
@@ -130,7 +145,7 @@ RUN mkdir -p /var/run/sshd \
     && echo 'root:rootpassword' | chpasswd \
     && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
     && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config \
-    && echo "Port 2222" >> /etc/ssh/sshd_config \
+    && echo "Port 2223" >> /etc/ssh/sshd_config \
     && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 RUN apt-get update && apt-get install -y bash-completion

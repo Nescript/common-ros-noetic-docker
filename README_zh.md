@@ -72,9 +72,17 @@ HOST_HOME_DIR=/home/你的用户名
 
 ### 3. 进入容器
 
+对于 AMD 和 NVIDIA 配置：
 ```bash
 docker exec -it ros1_noetic_dev bash
 ```
+
+对于 Intel 配置：
+```bash
+docker exec -it ros1_noetic_intel_dev bash
+```
+
+*(注：Intel 容器内的 SSH 服务端口已修改为 `2223`，而非默认的 `2222`，以防止与现存容器产生宿主机网络端口冲突。)*
 
 ## 配置说明
 

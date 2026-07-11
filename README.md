@@ -72,9 +72,17 @@ Compiles Mesa 26.1-devel from source targeting Intel's `iris` and `crocus` drive
 
 ### 3. Access the Container
 
+For AMD and NVIDIA configurations:
 ```bash
 docker exec -it ros1_noetic_dev bash
 ```
+
+For Intel configuration:
+```bash
+docker exec -it ros1_noetic_intel_dev bash
+```
+
+*(Note: The SSH server inside the Intel container is configured on port `2223` instead of `2222` to avoid host network conflicts when running containers concurrently.)*
 
 ## Configuration
 

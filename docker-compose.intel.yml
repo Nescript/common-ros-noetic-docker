@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile.intel
       args:
         HOST_HOME_DIR: ${HOST_HOME_DIR:-/home/hyd}
-    container_name: ros1_noetic_dev
+    container_name: ros1_noetic_intel_dev
     network_mode: "host"
     privileged: true
     command: /usr/sbin/sshd -D
