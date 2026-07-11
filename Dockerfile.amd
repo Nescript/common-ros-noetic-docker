@@ -71,19 +71,16 @@ RUN rm -f /etc/ros/rosdep/sources.list.d/20-default.list \
     && bash -lc 'set -e; for i in 1 2 3 4 5; do sudo -u nobody env HOME=/tmp/rosdep rosdep update && exit 0; echo "rosdep update failed (attempt ${i}), retrying..."; sleep 5; done; exit 1'
 
 # 5. 编译安装 Python 3.10 及现代构建工具 (Meson/Mako/Ninja)
-# 注意：此时不修改 /usr/bin/python3 软链接
 WORKDIR /opt/python_build
 RUN wget https://www.python.org/ftp/python/3.10.13/Python-3.10.13.tgz && \
     tar -xf Python-3.10.13.tgz && cd Python-3.10.13 && \
     ./configure --enable-optimizations && \
     make -j$(nproc) install && \
-    # 使用新安装的 python3.10 安装最新版构建工具，彻底解决 Ninja 版本过低问题
     curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10 && \
     python3.10 -m pip install meson mako ninja docutils pyyaml && \
     cd / && rm -rf /opt/python_build
 
 # 6. 升级驱动栈 (Wayland -> Libdrm -> Mesa)
-# 采用“临时软链接”策略，在单条 RUN 内完成编译后立即还原
 WORKDIR /opt/driver_stack
 RUN ln -sf /usr/local/bin/python3.10 /usr/bin/python3 && \
     ln -sf /usr/local/bin/python3.10 /usr/bin/python && \
@@ -117,7 +114,6 @@ RUN ln -sf /usr/local/bin/python3.10 /usr/bin/python3 && \
     ln -s /usr/bin/python3.8 /usr/bin/python3 && \
     cd / && rm -rf /opt/driver_stack
 
-# 恢复python3.8环境的小补丁,以及git信任仓库
 RUN rm -f /usr/bin/python && \
     rm /usr/bin/python3 && \
     rm /usr/local/bin/python3 && \
@@ -131,7 +127,7 @@ ENV XINIT_THREADS=1 \
 RUN mkdir -p -m 0700 /root/.ssh && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
 
-# 8. 配置 SSH 服务 (用于 remote-nvim 连接，运行在 2222 端口以避免与宿主机冲突)
+# 8. 配置 SSH 服务
 RUN mkdir -p /var/run/sshd \
     && echo 'root:rootpassword' | chpasswd \
     && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
@@ -153,7 +149,6 @@ alias pl="rosrun plotjuggler plotjuggler"
 alias openbash="vim ~/.bashrc"
 alias wired="sshpass -p dynamicx ssh dynamicx@192.168.100.2"
 alias wireless="sshpass -p dynamicx ssh dynamicx@192.168.1.116"
-alias hl='echo "Hello,world!"'
 alias wired_rqt="export ROS_MASTER_URI=http://192.168.100.2 && rqt"
 PS1='\${debian_chroot:+(\$debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '
 source /usr/share/bash-completion/bash_completion
@@ -175,5 +170,5 @@ EOF
 WORKDIR ${HOST_HOME_DIR}
 
 LABEL org.opencontainers.image.source=https://github.com/HydrogenZp/common-ros-noetic-docker \
-      org.opencontainers.image.description="ROS Noetic with Mesa 26.1 (AMD 880M/RDNA 3.5 support)" \
+      org.opencontainers.image.description="ROS Noetic with Mesa 26.1" \
       org.opencontainers.image.licenses=MIT

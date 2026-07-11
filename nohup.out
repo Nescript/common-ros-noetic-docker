@@ -1,0 +1,216 @@
+I2026-05-16 01:18:53.259280 instance.cpp:1420] Override Enabled Addons: {}
+I2026-05-16 01:18:53.265232 instance.cpp:1421] Override Disabled Addons: {}
+I2026-05-16 01:18:53.280735 addonmanager.cpp:204] Loaded addon imselector
+I2026-05-16 01:18:53.284411 addonmanager.cpp:204] Loaded addon quickphrase
+I2026-05-16 01:18:53.290522 xcbconnection.cpp:198] Connecting to X11 display, display name::0.
+I2026-05-16 01:18:53.290548 xcbconnection.cpp:203] X11 display: :0 is xwayland.
+I2026-05-16 01:18:53.290700 addonmanager.cpp:204] Loaded addon xcb
+I2026-05-16 01:18:53.293814 addonmanager.cpp:204] Loaded addon wayland
+I2026-05-16 01:18:53.295474 addonmanager.cpp:204] Loaded addon waylandim
+I2026-05-16 01:18:53.296167 keyboard.cpp:229] Attempting to load keyboard from: ["/usr/share/X11/xkb"] Rule: evdev
+I2026-05-16 01:18:53.299508 addonmanager.cpp:204] Loaded addon keyboard
+I2026-05-16 01:18:53.301017 addonmanager.cpp:204] Loaded addon clipboard
+I2026-05-16 01:18:53.303847 addonmanager.cpp:204] Loaded addon pinyinhelper
+I2026-05-16 01:18:53.306590 addonmanager.cpp:204] Loaded addon luaaddonloader
+I2026-05-16 01:18:53.308999 addonmanager.cpp:204] Loaded addon dbus
+I2026-05-16 01:18:53.310878 addonmanager.cpp:204] Loaded addon ibusfrontend
+I2026-05-16 01:18:53.313156 addonmanager.cpp:204] Loaded addon imeapi
+I2026-05-16 01:18:53.314364 addonmanager.cpp:204] Loaded addon unicode
+I2026-05-16 01:18:53.315758 addonmanager.cpp:204] Loaded addon dbusfrontend
+I2026-05-16 01:18:53.320376 addonmanager.cpp:204] Loaded addon fcitx4frontend
+I2026-05-16 01:18:53.321851 addonmanager.cpp:204] Loaded addon xim
+I2026-05-16 01:18:53.351987 inputmethodmanager.cpp:210] Found 748 input method(s) in addon keyboard
+I2026-05-16 01:18:53.375679 addonmanager.cpp:204] Loaded addon kimpanel
+I2026-05-16 01:18:53.376475 addonmanager.cpp:204] Loaded addon virtualkeyboard
+I2026-05-16 01:18:53.401430 classicui.cpp:89] Created classicui for x11 display::0
+I2026-05-16 01:18:53.401605 classicui.cpp:110] Created classicui for wayland display:
+I2026-05-16 01:18:53.401619 addonmanager.cpp:204] Loaded addon classicui
+I2026-05-16 01:18:53.402394 addonmanager.cpp:204] Loaded addon notificationitem
+I2026-05-16 01:18:53.403176 addonmanager.cpp:204] Loaded addon notifications
+I2026-05-16 01:18:53.406201 dbusmodule.cpp:841] Service name change: org.fcitx.Fcitx5  :1.107
+I2026-05-16 01:18:53.406293 kimpanel.cpp:116] Kimpanel new owner: 
+I2026-05-16 01:18:53.406340 virtualkeyboard.cpp:218] VirtualKeyboard new owner: 
+I2026-05-16 01:18:53.406655 portalsettingmonitor.cpp:97] A new portal show up, start a new query.
+I2026-05-16 01:18:53.407727 portalsettingmonitor.cpp:97] A new portal show up, start a new query.
+I2026-05-16 01:18:54.536033 addonmanager.cpp:204] Loaded addon punctuation
+I2026-05-16 01:18:54.743639 addonmanager.cpp:204] Loaded addon pinyin
+I2026-05-16 01:18:54.750350 addonmanager.cpp:204] Loaded addon cloudpinyin
+I2026-05-16 01:19:00.318330 waylandmodule.cpp:663] Wayland self diagnose information
+I2026-05-16 01:19:00.318441 waylandmodule.cpp:664] Using Wayland native input method protocol: 1
+I2026-05-16 01:19:00.318445 waylandmodule.cpp:666] Toolkit specific environment variable detected by process:
+I2026-05-16 01:19:00.318448 waylandmodule.cpp:668] GTK_IM_MODULE=
+I2026-05-16 01:19:00.318451 waylandmodule.cpp:669] QT_IM_MODULE=fcitx
+I2026-05-16 01:19:00.318454 waylandmodule.cpp:670] QT_IM_MODULES=
+I2026-05-16 01:19:06.435281 addonmanager.cpp:204] Loaded addon fullwidth
+I2026-05-16 01:19:06.436981 addonmanager.cpp:204] Loaded addon chttrans
+I2026-05-16 01:19:06.441992 addonmanager.cpp:204] Loaded addon spell
+I2026-05-16 01:48:57.818350 instance.cpp:1252] Running autosave...
+I2026-05-16 01:48:57.842270 instance.cpp:1254] End autosave
+I2026-05-16 02:36:57.818415 instance.cpp:1252] Running autosave...
+I2026-05-16 02:36:57.842843 instance.cpp:1254] End autosave
+I2026-05-16 04:30:01.578967 instance.cpp:1252] Running autosave...
+I2026-05-16 04:30:01.603421 instance.cpp:1254] End autosave
+I2026-05-16 04:48:13.474576 dbusmodule.cpp:832] Disconnected from DBus, exiting...
+I2026-05-16 04:48:13.515843 addonmanager.cpp:306] Unloading addon spell
+I2026-05-16 04:48:13.517081 addonmanager.cpp:306] Unloading addon chttrans
+I2026-05-16 04:48:13.517142 addonmanager.cpp:306] Unloading addon fullwidth
+I2026-05-16 04:48:13.517160 addonmanager.cpp:306] Unloading addon cloudpinyin
+I2026-05-16 04:48:13.521845 addonmanager.cpp:306] Unloading addon pinyin
+I2026-05-16 04:48:13.524945 addonmanager.cpp:306] Unloading addon punctuation
+I2026-05-16 04:48:13.525187 addonmanager.cpp:306] Unloading addon notifications
+I2026-05-16 04:48:13.525232 addonmanager.cpp:306] Unloading addon notificationitem
+I2026-05-16 04:48:13.525277 addonmanager.cpp:306] Unloading addon classicui
+I2026-05-16 04:48:13.534393 addonmanager.cpp:306] Unloading addon virtualkeyboard
+I2026-05-16 04:48:13.534463 addonmanager.cpp:306] Unloading addon kimpanel
+I2026-05-16 04:48:13.534481 addonmanager.cpp:306] Unloading addon xim
+I2026-05-16 04:48:13.538974 addonmanager.cpp:306] Unloading addon fcitx4frontend
+W2026-05-16 04:48:13.538967 xcbeventreader.cpp:52] XCB connection ":0" got error: 1
+I2026-05-16 04:48:13.539215 addonmanager.cpp:306] Unloading addon dbusfrontend
+I2026-05-16 04:48:13.539261 addonmanager.cpp:306] Unloading addon unicode
+I2026-05-16 04:48:13.539281 addonmanager.cpp:306] Unloading addon imeapi
+I2026-05-16 04:48:13.539471 addonmanager.cpp:306] Unloading addon ibusfrontend
+I2026-05-16 04:48:13.545174 addonmanager.cpp:306] Unloading addon dbus
+I2026-05-16 04:48:13.545304 addonmanager.cpp:306] Unloading addon luaaddonloader
+I2026-05-16 04:48:13.545329 addonmanager.cpp:306] Unloading addon pinyinhelper
+I2026-05-16 04:48:13.550801 addonmanager.cpp:306] Unloading addon clipboard
+I2026-05-16 04:48:13.551011 addonmanager.cpp:306] Unloading addon keyboard
+I2026-05-16 04:48:13.551229 addonmanager.cpp:306] Unloading addon waylandim
+I2026-05-16 04:48:13.551550 addonmanager.cpp:306] Unloading addon wayland
+I2026-05-16 04:48:13.551733 addonmanager.cpp:306] Unloading addon xcb
+I2026-05-16 04:48:13.552026 addonmanager.cpp:306] Unloading addon quickphrase
+I2026-05-16 04:48:13.552345 addonmanager.cpp:306] Unloading addon imselector
+I2026-06-10 16:27:17.266467 instance.cpp:1420] Override Enabled Addons: {}
+I2026-06-10 16:27:17.271759 instance.cpp:1421] Override Disabled Addons: {}
+I2026-06-10 16:27:17.278329 addonmanager.cpp:204] Loaded addon imselector
+I2026-06-10 16:27:17.280650 addonmanager.cpp:204] Loaded addon quickphrase
+I2026-06-10 16:27:17.284120 xcbconnection.cpp:198] Connecting to X11 display, display name::0.
+I2026-06-10 16:27:17.284152 xcbconnection.cpp:203] X11 display: :0 is xwayland.
+I2026-06-10 16:27:17.284259 addonmanager.cpp:204] Loaded addon xcb
+I2026-06-10 16:27:17.286847 addonmanager.cpp:204] Loaded addon wayland
+I2026-06-10 16:27:17.287992 addonmanager.cpp:204] Loaded addon waylandim
+I2026-06-10 16:27:17.288869 keyboard.cpp:229] Attempting to load keyboard from: ["/usr/share/X11/xkb"] Rule: evdev
+I2026-06-10 16:27:17.293494 addonmanager.cpp:204] Loaded addon keyboard
+I2026-06-10 16:27:17.294696 addonmanager.cpp:204] Loaded addon clipboard
+I2026-06-10 16:27:17.296549 addonmanager.cpp:204] Loaded addon pinyinhelper
+I2026-06-10 16:27:17.297958 addonmanager.cpp:204] Loaded addon luaaddonloader
+I2026-06-10 16:27:17.299881 addonmanager.cpp:204] Loaded addon dbus
+I2026-06-10 16:27:17.301449 addonmanager.cpp:204] Loaded addon ibusfrontend
+I2026-06-10 16:27:17.303297 addonmanager.cpp:204] Loaded addon imeapi
+I2026-06-10 16:27:17.304186 addonmanager.cpp:204] Loaded addon unicode
+I2026-06-10 16:27:17.305598 addonmanager.cpp:204] Loaded addon dbusfrontend
+I2026-06-10 16:27:17.309016 addonmanager.cpp:204] Loaded addon fcitx4frontend
+I2026-06-10 16:27:17.310558 addonmanager.cpp:204] Loaded addon xim
+I2026-06-10 16:27:17.338549 inputmethodmanager.cpp:210] Found 748 input method(s) in addon keyboard
+I2026-06-10 16:27:17.358177 addonmanager.cpp:204] Loaded addon kimpanel
+I2026-06-10 16:27:17.358897 addonmanager.cpp:204] Loaded addon virtualkeyboard
+I2026-06-10 16:27:17.382325 classicui.cpp:89] Created classicui for x11 display::0
+I2026-06-10 16:27:17.382511 classicui.cpp:110] Created classicui for wayland display:
+I2026-06-10 16:27:17.382537 addonmanager.cpp:204] Loaded addon classicui
+I2026-06-10 16:27:17.383302 addonmanager.cpp:204] Loaded addon notificationitem
+I2026-06-10 16:27:17.384045 addonmanager.cpp:204] Loaded addon notifications
+I2026-06-10 16:27:17.388313 dbusmodule.cpp:841] Service name change: org.fcitx.Fcitx5  :1.116
+I2026-06-10 16:27:17.388410 kimpanel.cpp:116] Kimpanel new owner: 
+I2026-06-10 16:27:17.388433 virtualkeyboard.cpp:218] VirtualKeyboard new owner: 
+I2026-06-10 16:27:17.388454 portalsettingmonitor.cpp:97] A new portal show up, start a new query.
+I2026-06-10 16:27:17.388551 portalsettingmonitor.cpp:97] A new portal show up, start a new query.
+I2026-06-10 16:27:18.449978 addonmanager.cpp:204] Loaded addon punctuation
+I2026-06-10 16:27:18.652229 addonmanager.cpp:204] Loaded addon pinyin
+I2026-06-10 16:27:18.657377 addonmanager.cpp:204] Loaded addon cloudpinyin
+I2026-06-10 16:27:21.412086 addonmanager.cpp:204] Loaded addon fullwidth
+I2026-06-10 16:27:21.414233 addonmanager.cpp:204] Loaded addon chttrans
+I2026-06-10 16:27:21.421364 addonmanager.cpp:204] Loaded addon spell
+I2026-06-10 16:27:24.438544 waylandmodule.cpp:663] Wayland self diagnose information
+I2026-06-10 16:27:24.438649 waylandmodule.cpp:664] Using Wayland native input method protocol: 1
+I2026-06-10 16:27:24.438657 waylandmodule.cpp:666] Toolkit specific environment variable detected by process:
+I2026-06-10 16:27:24.438662 waylandmodule.cpp:668] GTK_IM_MODULE=
+I2026-06-10 16:27:24.438667 waylandmodule.cpp:669] QT_IM_MODULE=fcitx
+I2026-06-10 16:27:24.438671 waylandmodule.cpp:670] QT_IM_MODULES=
+I2026-06-10 16:59:49.938595 instance.cpp:1252] Running autosave...
+I2026-06-10 16:59:49.961107 instance.cpp:1254] End autosave
+I2026-06-10 17:30:11.860535 addonmanager.cpp:204] Loaded addon emoji
+I2026-06-10 17:30:11.864126 emoji.cpp:221] Trying to load emoji for en from UnixFD(fd=38): 2180 entry(s) loaded.
+I2026-06-10 17:36:47.916669 instance.cpp:1252] Running autosave...
+I2026-06-10 17:36:47.938683 instance.cpp:1254] End autosave
+I2026-06-10 21:25:22.055772 instance.cpp:1252] Running autosave...
+I2026-06-10 21:25:22.079481 instance.cpp:1254] End autosave
+I2026-06-11 16:25:59.548706 instance.cpp:1252] Running autosave...
+I2026-06-11 16:25:59.572793 instance.cpp:1254] End autosave
+I2026-06-11 21:23:20.594050 instance.cpp:1252] Running autosave...
+I2026-06-11 21:23:20.622154 instance.cpp:1254] End autosave
+I2026-06-12 13:13:15.523009 instance.cpp:1252] Running autosave...
+I2026-06-12 13:13:15.547302 instance.cpp:1254] End autosave
+I2026-06-13 12:23:01.403746 instance.cpp:1252] Running autosave...
+I2026-06-13 12:23:01.427999 instance.cpp:1254] End autosave
+I2026-06-13 17:24:19.589084 instance.cpp:1252] Running autosave...
+I2026-06-13 17:24:19.611113 instance.cpp:1254] End autosave
+I2026-06-13 18:20:40.733811 instance.cpp:1252] Running autosave...
+I2026-06-13 18:20:40.758734 instance.cpp:1254] End autosave
+I2026-06-14 11:15:17.766560 instance.cpp:1252] Running autosave...
+I2026-06-14 11:15:17.787797 instance.cpp:1254] End autosave
+I2026-06-14 11:46:17.766610 instance.cpp:1252] Running autosave...
+I2026-06-14 11:46:17.786299 instance.cpp:1254] End autosave
+I2026-06-14 12:17:17.766577 instance.cpp:1252] Running autosave...
+I2026-06-14 12:17:17.783458 instance.cpp:1254] End autosave
+I2026-06-14 12:48:17.766624 instance.cpp:1252] Running autosave...
+I2026-06-14 12:48:17.793638 instance.cpp:1254] End autosave
+I2026-06-14 14:05:01.210537 instance.cpp:1252] Running autosave...
+I2026-06-14 14:05:01.236849 instance.cpp:1254] End autosave
+I2026-06-14 14:35:12.435805 instance.cpp:1252] Running autosave...
+I2026-06-14 14:35:12.458754 instance.cpp:1254] End autosave
+I2026-06-14 15:05:50.204899 instance.cpp:1252] Running autosave...
+I2026-06-14 15:05:50.222262 instance.cpp:1254] End autosave
+I2026-06-14 15:36:50.205247 instance.cpp:1252] Running autosave...
+I2026-06-14 15:36:50.231099 instance.cpp:1254] End autosave
+I2026-06-14 16:07:50.205210 instance.cpp:1252] Running autosave...
+I2026-06-14 16:07:50.228915 instance.cpp:1254] End autosave
+I2026-06-14 17:00:54.123595 instance.cpp:1252] Running autosave...
+I2026-06-14 17:00:54.147582 instance.cpp:1254] End autosave
+I2026-06-14 17:35:16.871088 instance.cpp:1252] Running autosave...
+I2026-06-14 17:35:16.896085 instance.cpp:1254] End autosave
+I2026-06-14 18:09:24.267389 instance.cpp:1252] Running autosave...
+I2026-06-14 18:09:24.350049 instance.cpp:1254] End autosave
+I2026-06-14 18:39:32.520875 instance.cpp:1252] Running autosave...
+I2026-06-14 18:39:32.547262 instance.cpp:1254] End autosave
+I2026-06-14 19:44:38.678560 instance.cpp:1252] Running autosave...
+I2026-06-14 19:44:38.759098 instance.cpp:1254] End autosave
+I2026-06-14 20:15:37.615513 instance.cpp:1252] Running autosave...
+I2026-06-14 20:15:37.697769 instance.cpp:1254] End autosave
+I2026-06-14 20:45:47.237487 instance.cpp:1252] Running autosave...
+I2026-06-14 20:45:47.319938 instance.cpp:1254] End autosave
+I2026-06-14 21:22:17.144055 instance.cpp:1252] Running autosave...
+I2026-06-14 21:22:17.169235 instance.cpp:1254] End autosave
+I2026-06-15 15:11:34.194363 instance.cpp:1252] Running autosave...
+I2026-06-15 15:11:34.418968 instance.cpp:1254] End autosave
+I2026-06-15 15:41:35.393839 instance.cpp:1252] Running autosave...
+I2026-06-15 15:41:35.437145 instance.cpp:1254] End autosave
+W2026-06-15 15:54:12.429658 xcbeventreader.cpp:52] XCB connection ":0" got error: 1
+I2026-06-15 15:54:12.446806 xcbmodule.cpp:90] Disconnected from X11 Display :0
+I2026-06-15 15:54:12.484446 dbusmodule.cpp:832] Disconnected from DBus, exiting...
+I2026-06-15 15:54:12.535240 addonmanager.cpp:306] Unloading addon emoji
+I2026-06-15 15:54:12.540291 addonmanager.cpp:306] Unloading addon spell
+I2026-06-15 15:54:12.545476 addonmanager.cpp:306] Unloading addon chttrans
+I2026-06-15 15:54:12.545838 addonmanager.cpp:306] Unloading addon fullwidth
+I2026-06-15 15:54:12.546383 addonmanager.cpp:306] Unloading addon cloudpinyin
+I2026-06-15 15:54:12.560629 addonmanager.cpp:306] Unloading addon pinyin
+I2026-06-15 15:54:12.571401 addonmanager.cpp:306] Unloading addon punctuation
+I2026-06-15 15:54:12.572771 addonmanager.cpp:306] Unloading addon notifications
+I2026-06-15 15:54:12.573017 addonmanager.cpp:306] Unloading addon notificationitem
+I2026-06-15 15:54:12.573151 addonmanager.cpp:306] Unloading addon classicui
+I2026-06-15 15:54:12.603824 addonmanager.cpp:306] Unloading addon virtualkeyboard
+I2026-06-15 15:54:12.604749 addonmanager.cpp:306] Unloading addon kimpanel
+I2026-06-15 15:54:12.605224 addonmanager.cpp:306] Unloading addon xim
+I2026-06-15 15:54:12.605443 addonmanager.cpp:306] Unloading addon fcitx4frontend
+I2026-06-15 15:54:12.606061 addonmanager.cpp:306] Unloading addon dbusfrontend
+I2026-06-15 15:54:12.606276 addonmanager.cpp:306] Unloading addon unicode
+I2026-06-15 15:54:12.606525 addonmanager.cpp:306] Unloading addon imeapi
+I2026-06-15 15:54:12.607558 addonmanager.cpp:306] Unloading addon ibusfrontend
+I2026-06-15 15:54:12.613074 addonmanager.cpp:306] Unloading addon dbus
+I2026-06-15 15:54:12.613434 addonmanager.cpp:306] Unloading addon luaaddonloader
+I2026-06-15 15:54:12.613487 addonmanager.cpp:306] Unloading addon pinyinhelper
+I2026-06-15 15:54:12.645621 addonmanager.cpp:306] Unloading addon clipboard
+I2026-06-15 15:54:12.647030 addonmanager.cpp:306] Unloading addon keyboard
+I2026-06-15 15:54:12.650192 addonmanager.cpp:306] Unloading addon waylandim
+I2026-06-15 15:54:12.651084 addonmanager.cpp:306] Unloading addon wayland
+I2026-06-15 15:54:12.651841 addonmanager.cpp:306] Unloading addon xcb
+I2026-06-15 15:54:12.651897 addonmanager.cpp:306] Unloading addon quickphrase
+I2026-06-15 15:54:12.657172 addonmanager.cpp:306] Unloading addon imselector

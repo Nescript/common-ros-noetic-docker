@@ -53,12 +53,6 @@ RUN apt-get update && apt-get install -y \
         ros-noetic-rosmon ros-noetic-rosmon-core ros-noetic-rosmon-msgs \
         python3-pip python3-catkin-tools python3-rosdep python3-rosinstall \
         python3-rosinstall-generator python3-wstool cmake libserial-dev iproute2 \
-        # 补充编译 Mesa 所需的底层库
-        libssl-dev zlib1g-dev libncurses5-dev libffi-dev libxml2-dev bison flex \
-        libelf-dev libunwind-dev libglvnd-dev x11proto-dev libx11-dev \
-        libx11-xcb-dev libxcb1-dev libxcb-randr0-dev libxcb-dri2-0-dev libxcb-dri3-dev \
-        libxcb-present-dev libxcb-sync-dev libxcb-shm0-dev libxcb-glx0-dev libxcb-xfixes0-dev \
-        libxfixes-dev libxdamage-dev libxshmfence-dev libxxf86vm-dev libxrandr-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # 4. 初始化 rosdep
@@ -81,7 +75,7 @@ ENV XINIT_THREADS=1 \
 RUN mkdir -p -m 0700 /root/.ssh && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
 
-# 8. 配置 SSH 服务 (用于 remote-nvim 连接，运行在 2222 端口以避免与宿主机冲突)
+# 8. 配置 SSH 服务
 RUN mkdir -p /var/run/sshd \
     && echo 'root:rootpassword' | chpasswd \
     && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
@@ -103,7 +97,6 @@ alias pl="rosrun plotjuggler plotjuggler"
 alias openbash="vim ~/.bashrc"
 alias wired="sshpass -p dynamicx ssh dynamicx@192.168.100.2"
 alias wireless="sshpass -p dynamicx ssh dynamicx@192.168.1.116"
-alias hl='echo "Hello,world!"'
 alias wired_rqt="export ROS_MASTER_URI=http://192.168.100.2 && rqt"
 PS1='\${debian_chroot:+(\$debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '
 source /usr/share/bash-completion/bash_completion
